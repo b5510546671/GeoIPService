@@ -13,6 +13,10 @@ import net.webservicex.*;
  */
 public class Service {
 	
+	public Service(){
+		
+	}
+	
 	/**
 	 * Creating the GeoIPService and get the country name of the provided IP address.
 	 * @param userIPAddress the IP address from the user.

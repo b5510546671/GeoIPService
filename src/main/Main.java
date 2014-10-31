@@ -1,5 +1,6 @@
 package main;
 
+import view.Gui;
 import controller.GeoIPServiceController;
 
 /**
@@ -14,7 +15,11 @@ public class Main {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args){
+		Gui ui = new Gui();
+
 		GeoIPServiceController controller = new GeoIPServiceController();
-		controller.start();
+
+		ui.setController(controller);
+		ui.run();
 	}
 }

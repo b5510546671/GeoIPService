@@ -1,5 +1,6 @@
 package controller;
 
+import model.Service;
 import view.Gui;
 
 /**
@@ -14,8 +15,16 @@ public class GeoIPServiceController {
 		
 	}
 	
-	public void start(){
-		Gui ui = new Gui();
-		ui.run();
+	/**
+	 * Make a contact with model to send input IP address 
+	 * 		from view and get the result from model to
+	 * 		return to view. 
+	 * @param ipAddress the IP address from user
+	 * @return country name of that IP
+	 */
+	public String retrieveCountryFromIPAddress(String ipAddress){
+		Service service = new Service();
+		String countryName = service.IPAddressService(ipAddress);
+		return countryName;
 	}
 }

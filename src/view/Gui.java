@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
+import controller.GeoIPServiceController;
+
 /**
  * A class for creating the User Interface.
  * @author Supavit 5510546671
@@ -15,6 +17,9 @@ import javax.swing.*;
  *
  */
 public class Gui extends JFrame{
+	
+	/** Controller of the application */
+	private GeoIPServiceController controller;
 	
 	/** Label for the word 'IP address' */
 	private JLabel inputLabel;
@@ -65,7 +70,28 @@ public class Gui extends JFrame{
 		panel.add(ipField);
 		panel.add(submitBtn);
 		panel.add(clearBtn);
+		panel.add(countryLabel);
 		add(panel);
+	}
+	
+	/**
+	 * Set controller of this user interface.
+	 * @param controller the controller to be set
+	 */
+	public void setController(GeoIPServiceController controller){
+		this.controller = controller;
+	}
+	
+	/**
+	 * Get controller of this user interface.
+	 * @return controller of this user interface
+	 */
+	public GeoIPServiceController getController(){
+		return this.controller;
+	}
+	
+	public void startGeoIPService(String ipAddress){
+		countryLabel.setText(this.controller.retrieveCountryFromIPAddress(ipAddress));
 	}
 	
 	/**
@@ -86,13 +112,13 @@ public class Gui extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//startFeedRss(urlField.getText());
+			startGeoIPService(ipField.getText());
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER){
-				//startFeedRss(urlField.getText());
+				startGeoIPService(ipField.getText());
 			}
 			
 		}
@@ -120,7 +146,7 @@ public class Gui extends JFrame{
 		public void actionPerformed(ActionEvent arg0) {
 			ipField.setText("");
 			ipField.grabFocus();
-			
+			countryLabel.setText("");
 		}
 		
 	}
