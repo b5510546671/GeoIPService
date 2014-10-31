@@ -1,5 +1,7 @@
 package controller;
 
+import view.Gui;
+
 /**
  * Controller that links between model and view.
  * @author Supavit 5510546671
@@ -13,6 +15,7 @@ public class GeoIPServiceController {
 	}
 	
 	public void start(){
-		
+		Gui ui = new Gui();
+		ui.run();
 	}
 }
