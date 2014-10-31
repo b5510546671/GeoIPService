@@ -49,7 +49,7 @@ public class Service {
 			
 			return country.getCountryName();
 		} catch(Exception e){
-			return "Some error has occured. Please try again later.";
+			return "Communication failure. Please try again later.";
 		}
 	}
 	
