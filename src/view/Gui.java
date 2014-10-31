@@ -1,10 +1,13 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javafx.scene.layout.Border;
 
 import javax.swing.*;
 
@@ -45,7 +48,8 @@ public class Gui extends JFrame{
 	public Gui(){
 		setTitle("GeoIP Service");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(700,100));
+		setPreferredSize(new Dimension(600,100));
+		setResizable(false);
 		initComponents();
 	}
 	
@@ -57,6 +61,7 @@ public class Gui extends JFrame{
 		submitBtn = new JButton("Submit");
 		submitBtn.addActionListener(new SubmitBtn());
 		submitBtn.addKeyListener(new SubmitBtn());
+		getRootPane().setDefaultButton(submitBtn);
 		
 		clearBtn = new JButton("Clear");
 		clearBtn.addActionListener(new ClearBtn());
@@ -70,7 +75,7 @@ public class Gui extends JFrame{
 		panel.add(ipField);
 		panel.add(submitBtn);
 		panel.add(clearBtn);
-		panel.add(countryLabel);
+		panel.add(countryLabel, BorderLayout.PAGE_END);
 		add(panel);
 	}
 	
@@ -119,6 +124,7 @@ public class Gui extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER){
 				startGeoIPService(ipField.getText());
+				System.out.println("hit enter");
 			}
 			
 		}

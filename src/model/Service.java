@@ -1,5 +1,8 @@
 package model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.webservicex.*;
 
 /**
@@ -13,8 +16,22 @@ import net.webservicex.*;
  */
 public class Service {
 	
+	/** Pattern of the IPv4 address */
+	private static final String PATTERN = "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+	
 	public Service(){
 		
+	}
+	
+	/**
+	 * Check if the IP is in the IPv4 address format.
+	 * @param userIPAddress the IP address from the user
+	 * @return country name if the IP is correct, 
+	 * 		"Invalid IP address" statement otherwise
+	 */
+	public String checkIP(String userIPAddress){
+		if(!validateIPAddress(userIPAddress)) return "Invalid IP address";
+		return IPAddressService(userIPAddress);
 	}
 	
 	/**
@@ -22,7 +39,7 @@ public class Service {
 	 * @param userIPAddress the IP address from the user.
 	 * @return country of that IP address
 	 */
-	public String IPAddressService(String userIPAddress){
+	public String IPAddressService(String userIPAddress){		
 		GeoIPService service = new GeoIPService();
 		
 		GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
@@ -30,6 +47,17 @@ public class Service {
 		GeoIP country = proxy.getGeoIP(userIPAddress);
 		
 		return country.getCountryName();
-		
 	}
+	
+	/**
+	 * Validates the IP address from user.
+	 * @param ipAddress IP address from user
+	 * @return true if valid, false otherwise
+	 */
+	public boolean validateIPAddress(String ipAddress){          
+		Pattern pattern = Pattern.compile(PATTERN);
+	    Matcher matcher = pattern.matcher(ipAddress);
+	    return matcher.matches();             
+	}
+	
 }

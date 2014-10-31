@@ -24,7 +24,7 @@ public class GeoIPServiceController {
 	 */
 	public String retrieveCountryFromIPAddress(String ipAddress){
 		Service service = new Service();
-		String countryName = service.IPAddressService(ipAddress);
+		String countryName = service.checkIP(ipAddress);
 		return countryName;
 	}
 }
