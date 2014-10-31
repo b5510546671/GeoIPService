@@ -16,8 +16,8 @@ public class GeoIPServiceController {
 	}
 	
 	/**
-	 * Make a contact with model to send input IP address 
-	 * 		from view and get the result from model to
+	 * Make a contact with model to send the input IP address 
+	 * 		from view and get the result back from model to
 	 * 		return to view. 
 	 * @param ipAddress the IP address from user
 	 * @return country name of that IP

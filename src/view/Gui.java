@@ -124,7 +124,6 @@ public class Gui extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER){
 				startGeoIPService(ipField.getText());
-				System.out.println("hit enter");
 			}
 			
 		}
