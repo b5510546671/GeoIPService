@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javafx.scene.layout.Border;
 
 import javax.swing.*;
 
@@ -48,7 +47,7 @@ public class Gui extends JFrame{
 	public Gui(){
 		setTitle("GeoIP Service");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(600,100));
+		setPreferredSize(new Dimension(530,110));
 		setResizable(false);
 		initComponents();
 	}

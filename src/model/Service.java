@@ -39,14 +39,18 @@ public class Service {
 	 * @param userIPAddress the IP address from the user.
 	 * @return country of that IP address
 	 */
-	public String IPAddressService(String userIPAddress){		
-		GeoIPService service = new GeoIPService();
-		
-		GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
-		
-		GeoIP country = proxy.getGeoIP(userIPAddress);
-		
-		return country.getCountryName();
+	public String IPAddressService(String userIPAddress){
+		try{
+			GeoIPService service = new GeoIPService();
+			
+			GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
+			
+			GeoIP country = proxy.getGeoIP(userIPAddress);
+			
+			return country.getCountryName();
+		} catch(Exception e){
+			return "Some error has occured. Please try again later.";
+		}
 	}
 	
 	/**
