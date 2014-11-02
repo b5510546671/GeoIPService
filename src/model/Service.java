@@ -58,7 +58,7 @@ public class Service {
 	 * @param ipAddress IP address from user
 	 * @return true if valid, false otherwise
 	 */
-	public boolean validateIPAddress(String ipAddress){          
+	public boolean validateIPAddress(String ipAddress){
 		Pattern pattern = Pattern.compile(PATTERN);
 	    Matcher matcher = pattern.matcher(ipAddress);
 	    return matcher.matches();             

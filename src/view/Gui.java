@@ -29,6 +29,7 @@ public class Gui extends JFrame{
 	/** The country of the input IP address */
 	private JLabel countryLabel;
 	
+	
 	/** Submit input button */
 	private JButton submitBtn;
 	
@@ -52,6 +53,9 @@ public class Gui extends JFrame{
 		initComponents();
 	}
 	
+	/**
+	 * Initialize all components on the screen.
+	 */
 	public void initComponents(){
 		inputLabel = new JLabel("IP address: ");
 		
@@ -94,6 +98,12 @@ public class Gui extends JFrame{
 		return this.controller;
 	}
 	
+	/**
+	 * Starting the GeoIP Service by asking the country name 
+	 * 		from the controller and sending	the given IP address 
+	 * 		to the controller at the same time.
+	 * @param ipAddress the given IP address
+	 */
 	public void startGeoIPService(String ipAddress){
 		countryLabel.setText(this.controller.retrieveCountryFromIPAddress(ipAddress));
 	}
