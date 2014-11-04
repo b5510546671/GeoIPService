@@ -16,7 +16,7 @@ import controller.GeoIPServiceController;
 /**
  * A class for creating the User Interface.
  * @author Supavit 5510546671
- * @version 2014.10.31
+ * @version 2014.11.04
  *
  */
 public class Gui extends JFrame{
