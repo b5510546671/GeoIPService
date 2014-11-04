@@ -6,7 +6,7 @@ import controller.GeoIPServiceController;
 /**
  * The main class of this project.
  * @author Supavit 5510546671
- * @version 2014.10.31
+ * @version 2014.11.04
  *
  */
 public class Main {
@@ -15,10 +15,8 @@ public class Main {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args){
-		Gui ui = new Gui();
-
+		Gui ui = Gui.getInstance();
 		GeoIPServiceController controller = new GeoIPServiceController();
-
 		ui.setController(controller);
 		ui.run();
 	}

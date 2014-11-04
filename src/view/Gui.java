@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
+
 import javax.swing.*;
 
 import controller.GeoIPServiceController;
@@ -29,7 +30,6 @@ public class Gui extends JFrame{
 	/** The country of the input IP address */
 	private JLabel countryLabel;
 	
-	
 	/** Submit input button */
 	private JButton submitBtn;
 	
@@ -42,6 +42,9 @@ public class Gui extends JFrame{
 	/** Panel for keeping all user interface components */
 	private JPanel panel;
 	
+	/** Instance of graphical user interface for this class */
+	private static Gui instance = new Gui();
+	
 	/**
 	 * Initializes a new user interface.
 	 */
@@ -51,6 +54,14 @@ public class Gui extends JFrame{
 		setPreferredSize(new Dimension(530,110));
 		setResizable(false);
 		initComponents();
+	}
+	
+	/**
+	 * Get instance of this class.
+	 * @return instance of this class
+	 */
+	public static Gui getInstance(){
+		return instance;
 	}
 	
 	/**
@@ -69,7 +80,7 @@ public class Gui extends JFrame{
 		clearBtn = new JButton("Clear");
 		clearBtn.addActionListener(new ClearBtn());
 		
-		ipField = new JTextField("...IP address...",25);
+		ipField = new JTextField("158.108.212.12",25);
 		ipField.grabFocus();
 		
 		panel = new JPanel();
@@ -105,7 +116,15 @@ public class Gui extends JFrame{
 	 * @param ipAddress the given IP address
 	 */
 	public void startGeoIPService(String ipAddress){
-		countryLabel.setText(this.controller.retrieveCountryFromIPAddress(ipAddress));
+		this.controller.retrieveCountryFromIPAddress(ipAddress);
+	}
+	
+	/**
+	 * Set name of country to the label.
+	 * @param countryName name of country to be set
+	 */
+	public void setCountryLabel(String countryName){
+		this.countryLabel.setText(countryName);
 	}
 	
 	/**

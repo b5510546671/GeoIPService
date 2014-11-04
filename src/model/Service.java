@@ -1,8 +1,12 @@
 package model;
 
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.SwingWorker;
+
+import view.Gui;
 import net.webservicex.*;
 
 /**
@@ -11,13 +15,19 @@ import net.webservicex.*;
  * 		with the web service.
  * 
  * @author Supavit 5510546671
- * @version 2014.10.31
+ * @version 2014.11.04
  *
  */
-public class Service {
+public class Service extends SwingWorker<String, Void> {
 	
 	/** Pattern of the IPv4 address */
 	private static final String PATTERN = "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+	
+	/** GUI instance */
+	private Gui gui = Gui.getInstance();
+	
+	/** The input IP address. */
+	private String userIPAddress = "";
 	
 	public Service(){
 		
@@ -26,30 +36,14 @@ public class Service {
 	/**
 	 * Check if the IP is in the IPv4 address format.
 	 * @param userIPAddress the IP address from the user
-	 * @return country name if the IP is correct, 
-	 * 		"Invalid IP address" statement otherwise
 	 */
-	public String checkIP(String userIPAddress){
-		if(!validateIPAddress(userIPAddress)) return "Invalid IP address";
-		return IPAddressService(userIPAddress);
-	}
-	
-	/**
-	 * Creating the GeoIPService and get the country name of the provided IP address.
-	 * @param userIPAddress the IP address from the user.
-	 * @return country of that IP address
-	 */
-	public String IPAddressService(String userIPAddress){
-		try{
-			GeoIPService service = new GeoIPService();
-			
-			GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
-			
-			GeoIP country = proxy.getGeoIP(userIPAddress);
-			
-			return country.getCountryName();
-		} catch(Exception e){
-			return "Communication failure. Please try again later.";
+	public void checkIP(String userIPAddress){
+		this.userIPAddress = userIPAddress;
+		if(!validateIPAddress(userIPAddress)) gui.setCountryLabel("Invalid IP address");
+		try {
+			this.execute();
+		} catch (Exception e) {
+			gui.setCountryLabel("Some error has occured.");
 		}
 	}
 	
@@ -62,6 +56,33 @@ public class Service {
 		Pattern pattern = Pattern.compile(PATTERN);
 	    Matcher matcher = pattern.matcher(ipAddress);
 	    return matcher.matches();             
+	}
+
+	@Override
+	protected String doInBackground() throws Exception {
+		try{
+			GeoIPService service = new GeoIPService();
+			
+			GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
+			
+			String countryName = proxy.getGeoIP(userIPAddress).getCountryName();
+			
+			return countryName;
+		} catch(Exception e){
+			return "Communication failure. Please try again later.";
+		}
+	}
+	@Override
+	protected void done() {
+		
+		super.done();
+		try {
+			gui.setCountryLabel(get());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
