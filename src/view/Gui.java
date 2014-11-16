@@ -9,6 +9,9 @@ import java.awt.event.KeyListener;
 
 
 
+
+import java.net.InetAddress;
+
 import javax.swing.*;
 
 import controller.GeoIPServiceController;
@@ -16,7 +19,7 @@ import controller.GeoIPServiceController;
 /**
  * A class for creating the User Interface.
  * @author Supavit 5510546671
- * @version 2014.11.04
+ * @version 2014.11.16
  *
  */
 public class Gui extends JFrame{
@@ -125,6 +128,28 @@ public class Gui extends JFrame{
 	 */
 	public void setCountryLabel(String countryName){
 		this.countryLabel.setText(countryName);
+	}
+	
+	/**
+	 * Show dialog box for error message due to
+	 * 		internet connection failure.
+	 */
+	public void handleConnectionFailure(){
+		JOptionPane.showMessageDialog(this, 
+				"No internet connection. Please check your internet connection.",
+			    "Error.",
+			    JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Show dialog box for error message due to
+	 * 		invalid IP address.
+	 */
+	public void handleMalformedIPAddress(){
+		JOptionPane.showMessageDialog(this,
+			    "Invalid IP address. Please check your input IP address.",
+			    "Error.",
+			    JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**

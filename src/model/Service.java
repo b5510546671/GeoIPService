@@ -15,7 +15,7 @@ import net.webservicex.*;
  * 		with the web service.
  * 
  * @author Supavit 5510546671
- * @version 2014.11.04
+ * @version 2014.11.16
  *
  */
 public class Service extends SwingWorker<String, Void> {
@@ -39,7 +39,7 @@ public class Service extends SwingWorker<String, Void> {
 	 */
 	public void checkIP(String userIPAddress){
 		this.userIPAddress = userIPAddress;
-		if(!validateIPAddress(userIPAddress)) gui.setCountryLabel("Invalid IP address");
+		if(!validateIPAddress(userIPAddress)) gui.handleMalformedIPAddress();;
 		try {
 			this.execute();
 		} catch (Exception e) {
@@ -69,7 +69,8 @@ public class Service extends SwingWorker<String, Void> {
 			
 			return countryName;
 		} catch(Exception e){
-			return "Communication failure. Please try again later.";
+			gui.handleConnectionFailure();
+			return "";
 		}
 	}
 	@Override
