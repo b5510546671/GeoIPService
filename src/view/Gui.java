@@ -6,10 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
-
-
 import java.net.InetAddress;
 
 import javax.swing.*;
@@ -44,6 +40,9 @@ public class Gui extends JFrame{
 	
 	/** Panel for keeping all user interface components */
 	private JPanel panel;
+	
+	/** Progress bar that is shown during making request. */
+	private ProgressBar bar;
 	
 	/** Instance of graphical user interface for this class */
 	private static Gui instance = new Gui();
@@ -132,11 +131,11 @@ public class Gui extends JFrame{
 	
 	/**
 	 * Show dialog box for error message due to
-	 * 		internet connection failure.
+	 * 		Internet connection failure.
 	 */
 	public void handleConnectionFailure(){
 		JOptionPane.showMessageDialog(this, 
-				"No internet connection. Please check your internet connection.",
+				"Connection failure. Please try again later.",
 			    "Error.",
 			    JOptionPane.ERROR_MESSAGE);
 	}
@@ -153,11 +152,25 @@ public class Gui extends JFrame{
 	}
 	
 	/**
+	 * Show progress bar during making request to the server.
+	 */
+	public void showProgressbar(){
+		bar = new ProgressBar();
+	}
+	
+	/**
+	 * Close progress bar when the country name is shown.
+	 */
+	public void closeProgressbar(){
+		bar.stopProgressBar();
+	}
+	/**
 	 * Run the user interface.
 	 */
 	public void run(){
 		pack();
 		setVisible(true);
+		setLocation(300, 100);
 	}
 	
 	

@@ -39,9 +39,13 @@ public class Service extends SwingWorker<String, Void> {
 	 */
 	public void checkIP(String userIPAddress){
 		this.userIPAddress = userIPAddress;
-		if(!validateIPAddress(userIPAddress)) gui.handleMalformedIPAddress();;
+		if(!validateIPAddress(userIPAddress)){
+			gui.handleMalformedIPAddress();
+			return;
+		}
 		try {
 			this.execute();
+			
 		} catch (Exception e) {
 			gui.setCountryLabel("Some error has occured.");
 		}
@@ -61,6 +65,7 @@ public class Service extends SwingWorker<String, Void> {
 	@Override
 	protected String doInBackground() throws Exception {
 		try{
+			gui.showProgressbar();
 			GeoIPService service = new GeoIPService();
 			
 			GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
@@ -75,9 +80,9 @@ public class Service extends SwingWorker<String, Void> {
 	}
 	@Override
 	protected void done() {
-		
 		super.done();
 		try {
+			gui.closeProgressbar();
 			gui.setCountryLabel(get());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
