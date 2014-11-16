@@ -1,4 +1,4 @@
-package view;
+package supavit.geoipservice.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,7 +10,7 @@ import java.net.InetAddress;
 
 import javax.swing.*;
 
-import controller.GeoIPServiceController;
+import supavit.geoipservice.controller.GeoIPServiceController;
 
 /**
  * A class for creating the User Interface.

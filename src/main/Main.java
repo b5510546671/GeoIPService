@@ -1,7 +1,7 @@
 package main;
 
-import view.Gui;
-import controller.GeoIPServiceController;
+import supavit.geoipservice.controller.GeoIPServiceController;
+import supavit.geoipservice.view.Gui;
 
 /**
  * The main class of this project.

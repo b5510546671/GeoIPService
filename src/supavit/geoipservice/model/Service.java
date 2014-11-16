@@ -1,4 +1,4 @@
-package model;
+package supavit.geoipservice.model;
 
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.SwingWorker;
 
-import view.Gui;
+import supavit.geoipservice.view.Gui;
 import net.webservicex.*;
 
 /**

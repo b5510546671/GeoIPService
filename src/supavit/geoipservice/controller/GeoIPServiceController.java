@@ -1,6 +1,6 @@
-package controller;
+package supavit.geoipservice.controller;
 
-import model.Service;
+import supavit.geoipservice.model.Service;
 
 /**
  * Controller that links between model and view.
