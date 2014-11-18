@@ -15,7 +15,7 @@ import supavit.geoipservice.controller.GeoIPServiceController;
 /**
  * A class for creating the User Interface.
  * @author Supavit 5510546671
- * @version 2014.11.16
+ * @version 2014.11.17
  *
  */
 public class Gui extends JFrame{
@@ -152,17 +152,24 @@ public class Gui extends JFrame{
 	}
 	
 	/**
-	 * Show progress bar during making request to the server.
+	 * Show progress bar during making request to the server
+	 * 		and disable submit button.
 	 */
 	public void showProgressbar(){
-		bar = new ProgressBar();
+		if(bar == null){
+			bar = new ProgressBar();
+			submitBtn.setEnabled(false);
+		}
 	}
 	
 	/**
-	 * Close progress bar when the country name is shown.
+	 * Close progress bar when the country name is shown
+	 * 		and enable submit button.
 	 */
 	public void closeProgressbar(){
 		bar.stopProgressBar();
+		bar = null;
+		submitBtn.setEnabled(true);
 	}
 	/**
 	 * Run the user interface.
