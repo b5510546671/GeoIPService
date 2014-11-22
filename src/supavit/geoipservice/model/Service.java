@@ -1,6 +1,7 @@
 package supavit.geoipservice.model;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,7 @@ import net.webservicex.*;
  * 		with the web service.
  * 
  * @author Supavit 5510546671
- * @version 2014.11.16
+ * @version 2014.11.22
  *
  */
 public class Service extends SwingWorker<String, Void> {
@@ -45,7 +46,7 @@ public class Service extends SwingWorker<String, Void> {
 		}
 		try {
 			this.execute();
-			
+	
 		} catch (Exception e) {
 			gui.setCountryLabel("Some error has occured.");
 		}
@@ -66,6 +67,9 @@ public class Service extends SwingWorker<String, Void> {
 	protected String doInBackground() throws Exception {
 		try{
 			gui.showProgressbar();
+			
+			this.get(15, TimeUnit.SECONDS);
+			
 			GeoIPService service = new GeoIPService();
 			
 			GeoIPServiceSoap proxy = service.getGeoIPServiceSoap();
