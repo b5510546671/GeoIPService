@@ -15,7 +15,7 @@ import supavit.geoipservice.controller.GeoIPServiceController;
 /**
  * A class for creating the User Interface.
  * @author Supavit 5510546671
- * @version 2014.11.17
+ * @version 2014.11.22
  *
  */
 public class Gui extends JFrame{
@@ -43,6 +43,9 @@ public class Gui extends JFrame{
 	
 	/** Progress bar that is shown during making request. */
 	private ProgressBar bar;
+	
+	/** Dialog box that tells user about connection failure. */
+	private FailureDialog failureDialog;
 	
 	/** Instance of graphical user interface for this class */
 	private static Gui instance = new Gui();
@@ -130,14 +133,27 @@ public class Gui extends JFrame{
 	}
 	
 	/**
+	 * Get the IP address.
+	 * @return IP address in String
+	 */
+	public String getIP(){
+		return ipField.getText();
+	}
+	
+	/**
 	 * Show dialog box for error message due to
 	 * 		Internet connection failure.
 	 */
 	public void handleConnectionFailure(){
-		JOptionPane.showMessageDialog(this, 
-				"Connection failure. Please try again later.",
-			    "Error.",
-			    JOptionPane.ERROR_MESSAGE);
+		if(failureDialog == null){
+			failureDialog = new FailureDialog();
+		}
+		failureDialog.setVisible(true);
+		
+//		JOptionPane.showMessageDialog(this, 
+//				"Connection failure. Please try again later.",
+//			    "Error.",
+//			    JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**
